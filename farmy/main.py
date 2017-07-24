@@ -1,6 +1,7 @@
 # coding: utf-8
 import os
 import csv
+import requests
 from apscheduler.scheduler import Scheduler
 from datetime import datetime
 from modules.light import read_light
@@ -8,7 +9,7 @@ from modules.soil_moisture import get_moisture
 from modules.soil_temperature import get_celsius
 from modules.temperature_and_humidity import get_temperature_and_humidity
 from modules.camera import take_picture
-from settings import PUMP_PIN, DHT_PIN
+from settings import PUMP_PIN, DHT_PIN, FARMY_SENSOR_DATA_ENDPOINT, FARMY_TRIGGERS_ENDPOINT, FARMY_PLANT_ID, API_KEY
 
 import argparse
 
@@ -26,6 +27,14 @@ def write_data(data, path):
         fieldnames = ['light', 'temperature', 'humidity', 'soil_moisture', 'soil_temperature', 'ts', 'dt']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(data)
+
+
+def publish_data(data, plant_id, api_key):
+    res = requests.post(FARMY_SENSOR_DATA_ENDPOINT.format(plant_id=plant_id),
+                        data=data,
+                        headers={"X-Farmy-Api-Key": api_key})
+    if not res.ok:
+        print(res.content)
 
 
 def fetch_data(path):
@@ -48,6 +57,7 @@ def fetch_data(path):
     ))
     print(data)
     write_data(data, path)
+    publish_data(data, FARMY_PLANT_ID, API_KEY)
     return data
 
 

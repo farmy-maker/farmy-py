@@ -11,6 +11,6 @@ def get_celsius():
 
 if __name__ == "__main__":
     while True:
-        temperature = sensor.get_temperatures()
+        temperature = get_celsius()
         print("Celsius: {0:.3f}".format(temperature))
         time.sleep(3)
