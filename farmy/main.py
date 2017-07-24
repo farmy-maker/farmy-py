@@ -8,6 +8,7 @@ from modules.soil_moisture import get_moisture
 from modules.soil_temperature import get_celsius
 from modules.temperature_and_humidity import get_temperature_and_humidity
 from modules.camera import take_picture
+from settings import PUMP_PIN, DHT_PIN
 
 import argparse
 
@@ -34,7 +35,7 @@ def fetch_data(path):
         soil_moisture=get_moisture(),
         soil_temperature=get_celsius(),
     )
-    temperature, humidity = get_temperature_and_humidity()
+    temperature, humidity = get_temperature_and_humidity(DHT_PIN)
     if temperature is not None:
         data.update(dict(
             temperature=temperature,

@@ -1,4 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
+import time
 from w1thermsensor import W1ThermSensor
 
 sensor = W1ThermSensor()
@@ -9,5 +10,7 @@ def get_celsius():
 
 
 if __name__ == "__main__":
-    temperature = sensor.get_temperatures()
-    print("Celsius: {0:.3f}".format(temperature))
+    while True:
+        temperature = sensor.get_temperatures()
+        print("Celsius: {0:.3f}".format(temperature))
+        time.sleep(3)

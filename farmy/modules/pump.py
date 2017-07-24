@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 import time
 
-PIN_PUMP = 24
+PUMP_PIN = 24  # pin of pump
 
 
 def run_pwm(pin, power, seconds):
@@ -14,3 +14,8 @@ def run_pwm(pin, power, seconds):
     time.sleep(seconds)
     obj.stop()
     GPIO.cleanup()
+
+
+if __name__ == "__main__":
+    run_pwm(PUMP_PIN, 50, 1)
+    print("Pump Start for a second with 50% power")
