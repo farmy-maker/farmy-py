@@ -15,7 +15,7 @@ def _get_temperature_and_humidity():
 
 
 def get_temperature_and_humidity():
-    for retry in range(3):
+    for retry in range(20):
         time.sleep(0.1)
         result = _get_temperature_and_humidity()
         if result:
