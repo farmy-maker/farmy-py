@@ -13,7 +13,7 @@ def read_adc(spi, channel):
 
 
 def convert_volts(adc):
-    ret = round((adc * 3.3) / float(1023), 4)
+    ret = round((adc * 3.3) / float(1023), 3)
     return ret
 
 

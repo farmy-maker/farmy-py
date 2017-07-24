@@ -5,7 +5,7 @@ sensor = W1ThermSensor()
 
 
 def get_celsius():
-    return sensor.get_temperature()
+    return round(sensor.get_temperature(), 3)
 
 
 if __name__ == "__main__":

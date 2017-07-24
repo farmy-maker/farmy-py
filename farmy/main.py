@@ -34,11 +34,11 @@ def fetch_data(path):
         soil_moisture=get_moisture(),
         soil_temperature=get_celsius(),
     )
-    dht_result = get_temperature_and_humidity()
-    if dht_result:
+    temperature, humidity = get_temperature_and_humidity()
+    if temperature is not None:
         data.update(dict(
-            temperature=dht_result.temperature,
-            humidity=dht_result.humidity
+            temperature=temperature,
+            humidity=humidity
         ))
     now = datetime.now()
     data.update(dict(
@@ -62,6 +62,6 @@ if __name__ == "__main__":
 
     sched = Scheduler()
     sched.start()
-    sched.add_cron_job(fetch_data, minute="*/10", args=[path])  # run every 10 minute
-    sched.add_cron_job(take_picture, minute="*/30", args=[image_path, camera_type])  # run every 30 minute
+    sched.add_cron_job(fetch_data, second="*/10", args=[path])  # run every 10 minute
+    sched.add_cron_job(take_picture, second="*/30", args=[image_path, camera_type])  # run every 30 minute
     raw_input("Press enter to exit the program\n")
