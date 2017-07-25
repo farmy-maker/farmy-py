@@ -9,16 +9,16 @@ from modules.soil_moisture import get_moisture
 from modules.soil_temperature import get_celsius
 from modules.temperature_and_humidity import get_temperature_and_humidity
 from modules.camera import take_picture
-from settings import PUMP_PIN, DHT_PIN, FARMY_SENSOR_DATA_ENDPOINT, FARMY_TRIGGERS_ENDPOINT, FARMY_PLANT_ID, API_KEY
+from settings import PUMP_PIN, DHT_PIN, \
+    FARMY_SENSOR_DATA_ENDPOINT, FARMY_TRIGGERS_ENDPOINT, \
+    FARMY_PLANT_ID, API_KEY, CAMERA_TYPE
 
 import argparse
 
 parser = argparse.ArgumentParser(description="Farmy Raspberry Pi Client")
 parser.add_argument('--path', type=str)
-parser.add_argument('--camera-type', dest='camera_type', type=str)
 
 DEFAULT_PATH = '/home/pi/farmy'
-DEFAULT_CAMERA = 'pi'
 
 
 def write_data(data, path):
@@ -66,7 +66,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     path = args.path or DEFAULT_PATH
     image_path = os.path.join(path, 'photos')
-    camera_type = args.camera_type or DEFAULT_CAMERA
 
     if not os.path.exists(image_path):
         os.makedirs(image_path)
@@ -74,5 +73,5 @@ if __name__ == "__main__":
     sched = Scheduler()
     sched.start()
     sched.add_cron_job(fetch_data, minute="*/10", args=[path])  # run every 10 minute
-    sched.add_cron_job(take_picture, minute="*/10", args=[image_path, camera_type])  # run every 10 minute
+    sched.add_cron_job(take_picture, minute="*/10", args=[image_path, CAMERA_TYPE])  # run every 10 minute
     raw_input("Press enter to exit the program\n")
