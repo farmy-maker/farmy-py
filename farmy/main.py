@@ -73,6 +73,6 @@ if __name__ == "__main__":
 
     sched = Scheduler()
     sched.start()
-    sched.add_cron_job(fetch_data, second="*/10", args=[path])  # run every 10 minute
-    sched.add_cron_job(take_picture, second="*/30", args=[image_path, camera_type])  # run every 30 minute
+    sched.add_cron_job(fetch_data, minute="*/10", args=[path])  # run every 10 minute
+    sched.add_cron_job(take_picture, minute="*/10", args=[image_path, camera_type])  # run every 10 minute
     raw_input("Press enter to exit the program\n")

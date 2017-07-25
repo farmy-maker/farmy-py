@@ -10,6 +10,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--camera-type', dest='camera_type', type=str, default='web')
 
 
+web_camera = Camera()
+
+
 def take_picture_pi(path):
     path = path if path.endswith('/') else path + '/'
     with picamera.PiCamera() as camera:
@@ -20,8 +23,7 @@ def take_picture_pi(path):
 
 def take_picture_web(path):
     path = path if path.endswith('/') else path + '/'
-    camera = Camera()
-    img = camera.getImage()
+    img = web_camera.getImage()
     file_name = datetime.now().strftime("%Y%m%d%H%M%S") + ".jpg"
     img.save(path + file_name)
 
