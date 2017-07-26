@@ -9,8 +9,10 @@ DEFAULT_PICTURE_PATH = "/tmp/"
 parser = argparse.ArgumentParser()
 parser.add_argument('--camera-type', dest='camera_type', type=str, default='web')
 
-
-web_camera = Camera()
+try:
+    web_camera = Camera()
+except:
+    pass
 
 
 def take_picture_pi(path):
@@ -29,7 +31,7 @@ def take_picture_web(path):
 
 
 def take_picture(path, camera_type):
-    if camera_type == 'web':
+    if camera_type == 'web' and web_camera:
         take_picture_web(path)
     elif camera_type == 'pi':
         take_picture_pi(path)
