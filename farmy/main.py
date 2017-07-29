@@ -3,7 +3,7 @@ import os
 from apscheduler.scheduler import Scheduler
 from datetime import datetime
 
-from modules.camera.picamera import take_picture_pi, pi_camera
+from modules.camera.pi import take_picture_pi, pi_camera
 from modules.camera.webcam import take_picture_web, web_camera
 from modules.light import read_light
 from modules.soil_moisture import get_moisture
