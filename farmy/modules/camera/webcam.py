@@ -7,6 +7,7 @@ DEFAULT_PICTURE_PATH = "/tmp/"
 
 try:
     web_camera = Camera()
+    web_camera.getImage()
     print('webcam Init.')
 except:
     web_camera = None

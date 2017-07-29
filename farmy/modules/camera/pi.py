@@ -9,6 +9,7 @@ DEFAULT_PICTURE_PATH = "/tmp/"
 
 try:
     pi_camera = PiCamera()
+    pi_camera.start_preview()
     print('pi camera Init.')
 except:
     pi_camera = None
