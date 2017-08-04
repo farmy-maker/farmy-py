@@ -22,3 +22,12 @@ def publish_image(image_raw, plant_id, api_key):
                         files={'image': image_raw})
     if not res.ok:
         print(res.content)
+
+
+def get_triggers(plant_id, api_key):
+    res = requests.get(FARMY_TRIGGERS_ENDPOINT.format(plant_id=plant_id),
+                       headers={"X-Farmy-Api-Key": api_key})
+    if not res.ok:
+        print(res.content)
+    else:
+        return res.json()
