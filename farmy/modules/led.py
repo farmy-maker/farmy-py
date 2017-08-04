@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 import time
 
-PUMP_PIN = 24  # pin of pump
+LED_PIN = 23  # pin of led
 
 
 def run(pin, power, seconds):
@@ -32,5 +32,5 @@ def turn_off(pin):
 
 
 if __name__ == "__main__":
-    run(PUMP_PIN, 50, 1)
-    print("Pump Start for a second with 50% power")
+    run(LED_PIN, 50, 1)
+    print("Led Start for a second with 50% power")
