@@ -9,7 +9,8 @@ from modules.light import read_light
 from modules.soil_moisture import get_moisture
 from modules.soil_temperature import get_celsius
 from modules.temperature_and_humidity import get_temperature_and_humidity
-from api import publish_data, publish_image
+from modules.controller import Controller
+from api import publish_data, publish_image, get_triggers
 from output import write_data, write_image
 
 parser = argparse.ArgumentParser(description="Farmy Raspberry Pi Client")
@@ -58,6 +59,18 @@ def fetch_image(file_path, camera_type, plant_id, api_key):
     write_image(image_raw, file_path)
     print('Take Picture by {}. Save to {}'.format(camera_type, file_path))
     publish_image(image_raw, plant_id, api_key)
+
+
+def trigger(pump_pin, led_pin, plant_id, api_key):
+    pump_controller = Controller(pump_pin)
+    led_controller = Controller(led_pin)
+    triggers = get_triggers(plant_id, api_key)
+    for trigger_data in triggers:
+        action = trigger_data['action']
+        if trigger_data['controller'] == 'pump':
+            getattr(pump_controller, action)()
+        else:
+            getattr(led_controller, action)()
 
 
 def check_device(camera_type):
