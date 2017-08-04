@@ -20,8 +20,7 @@ def convert_volts(adc):
 def get_moisture():
     spi = spidev.SpiDev()
     spi.open(0, 0)
-    adc = read_adc(spi, CHANNEL)
-    ret = convert_volts(adc)
+    ret = read_adc(spi, CHANNEL)
     spi.close()
     return ret
 
