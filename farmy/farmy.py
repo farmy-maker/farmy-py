@@ -96,6 +96,8 @@ def main():
     dht_pin = config.getint('device', 'dht_pin')
     plant_id = config.get('api', 'plant_id')
     api_key = config.get('api', 'api_key')
+    pump_pin = config.getint('device', 'pump_pin')
+    led_pin = config.getint('device', 'led_pin')
 
     check_device(camera_type)
     print("Farmy device init.")
@@ -112,10 +114,15 @@ def main():
                            args=[file_path, dht_pin, plant_id, api_key])  # run every 10 minute
         sched.add_cron_job(fetch_image, minute="*/10",
                            args=[image_path, camera_type, plant_id, api_key])  # run every 10 minute
+        sched.add_cron_job(trigger, minute="*/10",
+                           args=[pump_pin, led_pin, plant_id, api_key])  # run every 10 minute
+
+        trigger(pump_pin, led_pin, plant_id, api_key)
         raw_input("Press enter to exit the program\n")
     elif mode == 'once':
         fetch_data(file_path, dht_pin, plant_id, api_key)
         fetch_image(file_path, camera_type, plant_id, api_key)
+        trigger(pump_pin, led_pin, plant_id, api_key)
     else:
         print('`--mode` option invalid. `hold` or `once`')
 

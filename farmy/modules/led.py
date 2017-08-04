@@ -1,10 +1,10 @@
 # coding: utf-8
-from .trigger import Trigger
+from modules.controller import Controller
 
 LED_PIN = 23  # pin of led
 
 
 if __name__ == "__main__":
-    trigger = Trigger(LED_PIN)
-    trigger.run(50, 1)
+    controller = Controller(LED_PIN)
+    controller.run(50, 1)
     print("Led Start for a second with 50% power")
