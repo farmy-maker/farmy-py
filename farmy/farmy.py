@@ -43,6 +43,10 @@ def fetch_data(file_path, dht_pin, plant_id, api_key):
 
 
 def fetch_image(file_path, camera_type, plant_id, api_key):
+    light = read_light()
+    if light <= 5:
+        print('Too dark to take photo.')
+        return
     if camera_type == 'web':
         from modules.camera.webcam import take_picture_web
         image_raw = take_picture_web()
@@ -100,7 +104,7 @@ def main():
         fetch_data(file_path, dht_pin, plant_id, api_key)
         fetch_image(file_path, camera_type, plant_id, api_key)
     else:
-        print('`--mode` option invalid. `hold`/`once`')
+        print('`--mode` option invalid. `hold` or `once`')
 
 
 if __name__ == "__main__":
