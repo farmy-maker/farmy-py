@@ -1,5 +1,5 @@
 # farmy-py
-Python SDK for Farmy
+Python SDK for [Farmy](https://www.farmy.net/)
 
 ### Raspberry Pi Configuration
 ```
