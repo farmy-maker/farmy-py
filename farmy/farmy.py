@@ -112,8 +112,8 @@ def main():
         sched.start()
         sched.add_cron_job(fetch_data, minute="*/10",
                            args=[file_path, dht_pin, plant_id, api_key])  # run every 10 minute
-        sched.add_cron_job(fetch_image, minute="*/10",
-                           args=[image_path, camera_type, plant_id, api_key])  # run every 10 minute
+        sched.add_cron_job(fetch_image, minute="*/30",
+                           args=[image_path, camera_type, plant_id, api_key])  # run every 30 minute
         sched.add_cron_job(trigger, minute="*/10",
                            args=[pump_pin, led_pin, plant_id, api_key])  # run every 10 minute
 
