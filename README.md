@@ -12,7 +12,7 @@ Enable Camera, I2C, 1-Wire.
 
 #### Requirements
 ```
-pi@raspberrypi:~ $ sudo apt-get install python-pip python-dev git
+pi@raspberrypi:~ $ sudo apt-get install python-pip python-dev python-opencv python-scipy git
 ```
 
 #### Download Source code
