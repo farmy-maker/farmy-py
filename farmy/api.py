@@ -1,7 +1,7 @@
 # coding: utf-8
 import requests
 
-FARMY_HOST = "http://www.farmy.net"
+FARMY_HOST = "https://www.farmy.net"
 FARMY_USER_PLANT_ENDPOINT = FARMY_HOST + "/api/v0/user_plants/{plant_id}"
 FARMY_SENSOR_DATA_ENDPOINT = FARMY_USER_PLANT_ENDPOINT + "/data/"
 FARMY_IMAGE_ENDPOINT = FARMY_USER_PLANT_ENDPOINT + "/image/"
